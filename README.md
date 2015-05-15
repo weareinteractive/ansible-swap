@@ -10,7 +10,7 @@
 > * installs swap file
 > * configures swap
 >
-> It's currently used i.e. for [digital ocean droplets](https://www.digitalocean.com/community/tutorials/how-to-add-swap-on-ubuntu-14-04).
+> Use for example on [digital ocean droplets](https://www.digitalocean.com/community/tutorials/how-to-add-swap-on-ubuntu-14-04).
 
 ## Installation
 
