@@ -10,7 +10,9 @@
 > * installs swap file
 > * configures swap
 >
-> Use for example on [digital ocean droplets](https://www.digitalocean.com/community/tutorials/how-to-add-swap-on-ubuntu-14-04).
+> Used i.e. with [digital ocean droplets](https://www.digitalocean.com/community/tutorials/how-to-add-swap-on-ubuntu-14-04).
+>
+> NOTE: Travis currently fails due to permission errors as you can't create swap files.
 
 ## Installation
 

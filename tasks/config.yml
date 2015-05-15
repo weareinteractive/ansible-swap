@@ -6,21 +6,11 @@
     line: "{{ swap_file_path }}   none    swap    sw    0   0"
 
 - name: Setting swappiness
-  command: >
-    sysctl vm.swappiness={{ swap_swappiness }}
-
-- name: Making swap permanent
-  lineinfile:
-    dest: /etc/sysctl.conf
-    line: "vm.swappiness={{ swap_swappiness }}"
-    regexp: '^vm\.swappiness'
+  sysctl:
+    name: vm.swappiness
+    value: "{{ swap_swappiness }}"
 
 - name: Setting vfs cache pressure
-  command: >
-    sysctl vm.vfs_cache_pressure={{ swap_vfs_scache_pressure }}
-
-- name: Making cache pressure permanent
-  lineinfile:
-    dest: /etc/sysctl.conf
-    line: "vm.vfs_scache_pressure={{ swap_vfs_scache_pressure }}"
-    regexp: '^vm\.vfs_scache_pressure'
+  sysctl:
+    name: vm.vfs_cache_pressure
+    value: "{{ swap_vfs_scache_pressure }}"
