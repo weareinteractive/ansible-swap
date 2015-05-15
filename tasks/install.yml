@@ -8,8 +8,8 @@
 
 - name: Creating swap file
   command: >
-    fallocate -l {{ swap_size }} {{ swap_file_path }}
-  when: !swap_file_stat.exists
+    fallocate -l {{ swap_file_size }} {{ swap_file_path }}
+  when: not swap_file_stat.stat.exists
 
 - name: Settings permissions
   file:
@@ -21,11 +21,9 @@
 - name: Making swap
   command: >
     mkswap {{ swap_file_path }}
-  when: !swap_file_stat.exists
+  when: not swap_file_stat.stat.exists
 
 - name: Enabling swap
   command: >
     swapon {{ swap_file_path }}
-  when: !swap_file_stat.exists
-
-
+  when: not swap_file_stat.stat.exists

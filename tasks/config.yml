@@ -13,7 +13,7 @@
   lineinfile:
     dest: /etc/sysctl.conf
     line: "vm.swappiness={{ swap_swappiness }}"
-    regexp: "^vm\.swappiness"
+    regexp: '^vm\.swappiness'
 
 - name: Setting vfs cache pressure
   command: >
@@ -23,4 +23,4 @@
   lineinfile:
     dest: /etc/sysctl.conf
     line: "vm.vfs_scache_pressure={{ swap_vfs_scache_pressure }}"
-    regexp: "^vm\.vfs_scache_pressure"
+    regexp: '^vm\.vfs_scache_pressure'
