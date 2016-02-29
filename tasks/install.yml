@@ -1,15 +1,32 @@
 ---
-# @todo: check size and recreate on change
 
 - name: Get stat of swap file
   stat:
     path: "{{ swap_file_path }}"
   register: swap_file_stat
 
-- name: Creating swap file
+- name: Configured size
+  debug:
+    var: swap_file_size
+
+- name: Current size
+  debug:
+    var: swap_file_stat.stat.size
+
+- name: Testing condition
+  debug:
+    var: swap_file_stat.stat.size
+  when: not swap_file_stat.stat.exists or swap_file_stat.stat.size|int != swap_file_size|int
+
+- name: Disabling swap
+  command: >
+    swapoff -a
+  when: swap_file_stat.stat.exists and swap_file_stat.stat.size|int != swap_file_size|int
+
+- name: Creating / Resizing swap file
   command: >
     fallocate -l {{ swap_file_size }} {{ swap_file_path }}
-  when: not swap_file_stat.stat.exists
+  when: not swap_file_stat.stat.exists or swap_file_stat.stat.size|int != swap_file_size|int
 
 - name: Settings permissions
   file:
@@ -21,9 +38,9 @@
 - name: Making swap
   command: >
     mkswap {{ swap_file_path }}
-  when: not swap_file_stat.stat.exists
+  when: not swap_file_stat.stat.exists or swap_file_stat.stat.size|int != swap_file_size|int
 
 - name: Enabling swap
   command: >
     swapon {{ swap_file_path }}
-  when: not swap_file_stat.stat.exists
+  when: not swap_file_stat.stat.exists or swap_file_stat.stat.size|int != swap_file_size|int

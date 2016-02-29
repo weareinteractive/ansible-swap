@@ -1,8 +1,13 @@
 ---
 
 - hosts: all
-  sudo: yes
   roles:
     - franklinkim.swap
   vars:
-    swap_file_size: 512M
+    swap_file_size: "{{ 128 * 1024 * 1024 }}" # 128MB
+
+- hosts: all
+  roles:
+    - franklinkim.swap
+  vars:
+    swap_file_size: "{{ 256 * 1024 * 1024 }}" # 256MB
