@@ -45,8 +45,8 @@ Here is a list of all the default variables for this role, which are also availa
 ```
 # swap file path
 swap_file_path: /swapfile
-# swap file size (512M, 1G)
-swap_file_size: 512M
+# swap file size in bytes
+swap_file_size: "{{ 512 * 1024 * 1024 }}" # 512MB
 # Configures how often your system swaps data out of RAM to the
 # swap space. This is a value between 0 and 100 that represents a percentage
 swap_swappiness: 10
@@ -65,11 +65,16 @@ These are the handlers that are defined in `handlers/main.yml`.
 
 ```
 - hosts: all
-  sudo: yes
   roles:
     - franklinkim.swap
   vars:
-    swap_file_size: 512M
+    swap_file_size: "{{ 128 * 1024 * 1024 }}" # 128MB
+
+- hosts: all
+  roles:
+    - franklinkim.swap
+  vars:
+    swap_file_size: "{{ 256 * 1024 * 1024 }}" # 256MB
 ```
 
 ## Testing
