@@ -1,8 +1,4 @@
 ---
-# For more information about default variables see:
-# http://www.ansibleworks.com/docs/playbooks_variables.html#id26
-#
-
 # swap file path
 swap_file_path: /swapfile
 # swap file size in bytes
